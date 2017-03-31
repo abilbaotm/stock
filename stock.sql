@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.6.5.2
+-- version 4.6.6
 -- https://www.phpmyadmin.net/
 --
--- Servidor: 127.0.0.1
--- Tiempo de generación: 01-03-2017 a las 20:42:18
--- Versión del servidor: 10.1.21-MariaDB
--- Versión de PHP: 5.6.30
+-- Host: localhost
+-- Generation Time: Mar 31, 2017 at 10:33 AM
+-- Server version: 5.7.17-0ubuntu0.16.04.1
+-- PHP Version: 7.0.15-0ubuntu0.16.04.2
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
@@ -17,7 +17,7 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Base de datos: `stock`
+-- Database: `stock`
 --
 CREATE DATABASE IF NOT EXISTS `stock` DEFAULT CHARACTER SET latin1 COLLATE latin1_swedish_ci;
 USE `stock`;
@@ -25,28 +25,29 @@ USE `stock`;
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `item`
+-- Table structure for table `item`
 --
 
 CREATE TABLE `item` (
   `id` int(11) NOT NULL,
   `name` varchar(200) NOT NULL,
   `barcode` int(12) DEFAULT NULL,
-  `stock` int(11) NOT NULL
+  `stock` int(11) NOT NULL,
+  `alerta` int(11) NOT NULL DEFAULT '10'
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Volcado de datos para la tabla `item`
+-- Dumping data for table `item`
 --
 
-INSERT INTO `item` (`id`, `name`, `barcode`, `stock`) VALUES
-(2, 'ESC', NULL, 1),
-(3, 'MOTOR', NULL, 0);
+INSERT INTO `item` (`id`, `name`, `barcode`, `stock`, `alerta`) VALUES
+(2, 'ESC', NULL, 9, 13),
+(3, 'MOTOR', NULL, 15, 10);
 
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `movement`
+-- Table structure for table `movement`
 --
 
 CREATE TABLE `movement` (
@@ -58,7 +59,7 @@ CREATE TABLE `movement` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Volcado de datos para la tabla `movement`
+-- Dumping data for table `movement`
 --
 
 INSERT INTO `movement` (`id`, `idItem`, `quantity`, `idRequest`, `timestamp`) VALUES
@@ -72,10 +73,18 @@ INSERT INTO `movement` (`id`, `idItem`, `quantity`, `idRequest`, `timestamp`) VA
 (9, 2, -1, NULL, '2017-02-26 16:50:47'),
 (10, 2, -1, NULL, '2017-02-26 16:50:48'),
 (11, 2, -1, NULL, '2017-02-26 16:50:49'),
-(12, 2, -1, NULL, '2017-02-26 16:51:19');
+(12, 2, -1, NULL, '2017-02-26 16:51:19'),
+(13, 2, -6, NULL, '2017-03-31 08:50:19'),
+(14, 2, 5, NULL, '2017-03-31 08:50:25'),
+(15, 2, 6, NULL, '2017-03-31 08:50:30'),
+(16, 2, -1, NULL, '2017-03-31 08:50:33'),
+(17, 3, 15, NULL, '2017-03-31 09:03:07'),
+(18, 2, 6, NULL, '2017-03-31 09:43:47'),
+(19, 2, -1, NULL, '2017-03-31 09:43:52'),
+(20, 2, -1, NULL, '2017-03-31 10:32:43');
 
 --
--- Disparadores `movement`
+-- Triggers `movement`
 --
 DELIMITER $$
 CREATE TRIGGER `stock` AFTER INSERT ON `movement` FOR EACH ROW UPDATE `item` SET `stock` = `stock`+NEW.quantity WHERE `item`.`id` = NEW.idItem
@@ -83,42 +92,42 @@ $$
 DELIMITER ;
 
 --
--- Índices para tablas volcadas
+-- Indexes for dumped tables
 --
 
 --
--- Indices de la tabla `item`
+-- Indexes for table `item`
 --
 ALTER TABLE `item`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indices de la tabla `movement`
+-- Indexes for table `movement`
 --
 ALTER TABLE `movement`
   ADD PRIMARY KEY (`id`),
   ADD KEY `idItem` (`idItem`);
 
 --
--- AUTO_INCREMENT de las tablas volcadas
+-- AUTO_INCREMENT for dumped tables
 --
 
 --
--- AUTO_INCREMENT de la tabla `item`
+-- AUTO_INCREMENT for table `item`
 --
 ALTER TABLE `item`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 --
--- AUTO_INCREMENT de la tabla `movement`
+-- AUTO_INCREMENT for table `movement`
 --
 ALTER TABLE `movement`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
 --
--- Restricciones para tablas volcadas
+-- Constraints for dumped tables
 --
 
 --
--- Filtros para la tabla `movement`
+-- Constraints for table `movement`
 --
 ALTER TABLE `movement`
   ADD CONSTRAINT `movement_ibfk_1` FOREIGN KEY (`idItem`) REFERENCES `item` (`id`);
