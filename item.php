@@ -42,19 +42,28 @@ include('includes/conectar.php');
     </section>
     <section class="content">
 	<div class="col-md-6">
+    <?php if($productoStock < $productoAlert){ ?>
+    <div class="alert alert-danger alert-dismissible">
+      <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+      <h4><i class="icon fa fa-ban"></i> Alert!</h4>
+      This element is under a Stock Alert. Please, review real stock and make a request if necessary.
+    </div>
+    <?php } ?>
 		<div class="box color-palette-box">
 			<div class="box-header">
 				<h3 class="box-title">Info</h3>
 			</div>
 			<div class="row">
-				<dl class="dl-horizontal">
-            <dt>Name</dt>
-            <dd><?php echo $productoName;?></dd>
-            <dt>Stock</dt>
-            <dd><?php echo $productoStock;?></dd>
-            <dt>Stock Alert</dt>
-            <dd><?php echo $productoAlert;?></dd>
-        </dl>
+        <div class="box-body">
+  				<dl class="dl-horizontal">
+              <dt>Name</dt>
+              <dd><?php echo $productoName;?></dd>
+              <dt>Stock</dt>
+              <dd><?php echo $productoStock;?></dd>
+              <dt>Stock Alert</dt>
+              <dd><?php echo $productoAlert;?></dd>
+          </dl>
+        </div>
 			</div>
 		</div>
 	</div>
