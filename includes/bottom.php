@@ -220,14 +220,12 @@
 <!-- page script -->
 <script>
   $(function () {
-    $("#example1").DataTable();
-    $('#example2').DataTable({
-      "paging": true,
-      "lengthChange": false,
+    $('#example1').DataTable({
       "searching": false,
       "ordering": true,
-      "info": true,
-      "autoWidth": false
+    });
+    $('#example2').DataTable({
+
     });
   });
 </script>
