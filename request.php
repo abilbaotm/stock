@@ -1,5 +1,18 @@
 <?php
   include('includes/conectar.php');
+  if ($_GET['create'] && $_GET['itemId']){
+    if ($_POST['qt']==""){
+      $qt="NULL";
+    } else {
+      $qt=$_POST['qt'];
+    }
+    $sql="INSERT INTO `request` (`id`, `requestDate`, `arrived`, `idItem`, `quantity`) VALUES (NULL, CURRENT_TIMESTAMP, NULL, '".$_GET['itemId']."', ".$qt.");";
+echo $sql;
+    if (mysqli_query($con, $sql)) {
+    } else {
+      echo "Error updating record: " . mysqli_error($con);
+    }
+  }
   if ($_POST['arrived'] && $_POST['arrived_action']){
     $sql="UPDATE `request` SET `arrived` = CURRENT_TIMESTAMP WHERE `request`.`id` = ".$_POST['arrived_action'].";";
     if (mysqli_query($con, $sql)) {

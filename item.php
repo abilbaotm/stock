@@ -82,6 +82,15 @@ include('includes/conectar.php');
               </div>
           </form>
           </div>
+          <div class="col-sm-12">
+            Create Request
+            <form action="request.php?create=true&amp;itemId=<?php echo $_GET['id'];?>" method="POST">
+              <div class="input-group">
+                <span class="input-group-addon">#</span>
+                <input type="number" class="form-control" value=0 name="qt">
+              </div>
+          </form>
+          </div>
         </div>
       </div>
     </div>
