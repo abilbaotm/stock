@@ -1,11 +1,10 @@
 <?php include('includes/alt.php');
   include('includes/conectar.php');
-  $sql = "SELECT `id`, `name`, `barcode`, `stock` FROM `item` ORDER BY name DESC";
+  $sql = "SELECT `id`, `name`, `barcode`, `stock`, `alerta` FROM `item` ORDER BY name DESC";
   $quer=mysqli_query($con,$sql);
-  $sql = "SELECT `id`, `name`, `barcode`, `stock` FROM `item` WHERE `stock` < `alerta`";
+  $sql = "SELECT `id`, `name`, `barcode`, `stock`, `alerta` FROM `item` WHERE `stock` < `alerta`";
   $querAlert=mysqli_query($con,$sql);
   mysqli_close($con);
-echo $sql;
 ?>
   <!-- Content Wrapper. Contains page content -->
   <div class="content-wrapper">
@@ -44,12 +43,13 @@ echo $sql;
                         $resulNombre=$resul['name'];
                         $resulBarcode=$resul['barcode'];
                         $resulStock=$resul['stock'];
+                        $resulAlert=$resul['alerta'];
                         ?>
                             <tr>
                               <td><a target="item" href="item.php?id=<?php echo sprintf('%04d', $resulID);?>"><?php echo "ERINV".sprintf('%04d', $resulID);?></a></td>
                               <td><?php echo $resulNombre;?></td>
                               <td><?php echo $resulBarcode;?></td>
-                              <td><?php echo $resulStock;?></td>
+                              <td><?php echo $resulStock;?>/<?php echo $resulAlert;?></td>
                             </tr>
                       <?php } ?>
                     </tfoot>
@@ -63,11 +63,11 @@ echo $sql;
         <div class="col-xs-12">
               <div class="box">
                 <div class="box-header">
-                  <h3 class="box-title">Data Table With Full Features</h3>
+                  <h3 class="box-title">Main Stock</h3>
                 </div>
                 <!-- /.box-header -->
                 <div class="box-body">
-                  <table id="example1" class="table table-bordered table-striped">
+                  <table id="example2" class="table table-bordered table-striped">
                     <thead>
                     <tr>
                       <th>ID</th>
@@ -99,16 +99,4 @@ echo $sql;
               </div>
             </section>
   </div>
-  <script>
-    $(function () {
-      $('#example2').DataTable({
-        "paging": true,
-        "lengthChange": false,
-        "searching": false,
-        "ordering": true,
-        "info": true,
-        "autoWidth": false
-      });
-    });
-  </script>
 <?php include('includes/bottom.php');?>
