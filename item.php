@@ -10,13 +10,14 @@ include('includes/conectar.php');
 
 
 
-  $sql = "SELECT `id`, `name`, `barcode`, `stock` FROM `item` WHERE `id` = ".$_GET['id']." LIMIT 1";
+  $sql = "SELECT `id`, `name`, `barcode`, `stock`, `alerta` FROM `item` WHERE `id` = ".$_GET['id']." LIMIT 1";
   $quer=mysqli_query($con,$sql);
   $resul = mysqli_fetch_assoc($quer);
     $productoID=$resul['id'];
     $productoName=$resul['name'];
     $productoBarcode=$resul['barcode'];
     $productoStock=$resul['stock'];
+    $productoAlert=$resul['alerta'];
 
 
 
@@ -47,10 +48,12 @@ include('includes/conectar.php');
 			</div>
 			<div class="row">
 				<dl class="dl-horizontal">
-            <dt>Nombre</dt>
+            <dt>Name</dt>
             <dd><?php echo $productoName;?></dd>
             <dt>Stock</dt>
             <dd><?php echo $productoStock;?></dd>
+            <dt>Stock Alert</dt>
+            <dd><?php echo $productoAlert;?></dd>
         </dl>
 			</div>
 		</div>
@@ -61,13 +64,15 @@ include('includes/conectar.php');
         <h3 class="box-title">Actions</h3>
       </div>
       <div class="row">
-        <div class="col-sm-12">
-          <form action="item.php?id=<?php echo $_GET['id'];?>" method="POST">
-            <div class="input-group">
-              <span class="input-group-addon">#</span>
-              <input type="number" class="form-control" value=-1 name="stock" autofocus>
-            </div>
-        </form>
+        <div class="box-body">
+          <div class="col-sm-12">
+            <form action="item.php?id=<?php echo $_GET['id'];?>" method="POST">
+              <div class="input-group">
+                <span class="input-group-addon">#</span>
+                <input type="number" class="form-control" value=-1 name="stock" autofocus>
+              </div>
+          </form>
+          </div>
         </div>
       </div>
     </div>
