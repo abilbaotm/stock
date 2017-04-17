@@ -80,6 +80,7 @@
           <ul class="treeview-menu menu-open" style="display: block;">
             <li><a href="."><i class="fa fa-circle-o"></i> Home</a></li>
             <li><a href="stock_alerts.php"><i class="fa fa-circle-o"></i> Stock Alerts</a></li>
+            <li><a href="request.php"><i class="fa fa-circle-o"></i> Requests</a></li>
             <li><a href="new.php"><i class="fa fa-circle-o"></i> New elemet</a></li>
           </ul>
         </li>
