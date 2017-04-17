@@ -38,7 +38,7 @@
               <h4><i class="icon fa fa-info"></i> Validate</h4>
               Validate the arrival of <?php echo $_GET['name'];?>. Increment the next value of elements to Stock:
               <form action="./request.php" method="post">
-                <input type="number" class="form-control" name="arrived" value="<?php if ($_GET['quantity'] = 0) {echo 0;} else {echo $_GET['quantity'];}?>" autofocus>
+                <input type="number" class="form-control" name="arrived" value="<?php if ($_GET['quantity'] == 0) {echo 0;} else {echo $_GET['quantity'];}?>" autofocus>
                 <input type="hidden" name="arrived_action" value="<?php echo $_GET['arrived'];?>">
                 <input type="hidden" name="itemId" value="<?php echo $_GET['itemId'];?>">
                 <input type="hidden" name="rq" value="<?php echo $_GET['rq'];?>">
